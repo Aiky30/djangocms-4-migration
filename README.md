@@ -23,7 +23,7 @@ Requires knowledge of django CMS Versioning
 - Understanding how versioning selects published content
 
 ### Install the following packages
-The following packages are nto yet officially released are installed from the repository directly. We need your help to make packages v4.0 compatble and provide documentation for the wider community!
+The following packages are not yet officially released, they need to be installed directly from the repository. We need your help to make packages v4.0 compatible and to provide documentation for the wider community!
 
 django CMS 4.0
 ```
@@ -60,7 +60,7 @@ Simply run the following command to run the data migration.
 python manage.py cms4_migration
 ```
 
-## Common solutions
+## Common solutions for django CMS 4.0 compatibility
 
 Import PageContent in a backwards compatible way (Title).
 ```python
