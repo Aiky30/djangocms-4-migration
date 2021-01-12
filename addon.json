@@ -1,0 +1,7 @@
+{
+  "package-name": "djangocms-4-migration",
+  "installed-apps": [
+    "djangocms_4_migration"
+  ]
+}
+  
