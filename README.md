@@ -1,5 +1,7 @@
 # django CMS 4 Migration
 
+**Warning:** If the migration process fails to complete you will not be able to undo the changes without reloading a database backup. We cannot be held accountable for any data loss sustained when running the commands provided in this project. Please keep a database backup before running any commands provided by this package. 
+
 ## When do I need this package?
 This package is designed to migrate a django CMS 3.5+ project to django CMS 4.0.
 
