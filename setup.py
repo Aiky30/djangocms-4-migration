@@ -7,6 +7,7 @@ setup(
     name='djangocms-4-migration',
     version=__version__,
     author="Andrew Aikman (Aiky30)",
+    url='https://github.com/Aiky30/djangocms-4-migration/',
     description="A django CMS 3 to 4 migration package",
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
