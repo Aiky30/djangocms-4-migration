@@ -1,6 +1,9 @@
 # Changelog
 
 ## (unreleased)
+
+
+## 0.0.2 (2023-07-11)
 * fix: Added the Github project url to the setup.py file for PyPi linking
 
 ## 0.0.1 (2021-01-12)
