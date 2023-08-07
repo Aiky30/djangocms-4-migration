@@ -55,6 +55,14 @@ First install this package in your project
 pip install djangocms-4-migration
 ```
 
+## Configuration
+
+If you have a custom user model, you should designate a "migration user" by specifying the user ID in your settings like so:
+
+```
+CMS_MIGRATION_USER_ID = <user id>
+```
+
 ## Running
 Simply run the following command to run the data migration. 
 **Note:** This command calls the django migrate command, this is because it has to run commands that save information that would have been lost by running the cms migrations directly.
