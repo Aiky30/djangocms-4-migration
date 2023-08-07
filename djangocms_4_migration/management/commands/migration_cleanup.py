@@ -17,6 +17,35 @@ from djangocms_versioning.models import Version
 logger = logging.getLogger(__name__)
 
 
+def _fix_page_references(page):
+    relations = [
+        f
+        for f in Page._meta.get_fields()
+        if (f.one_to_many or f.one_to_one or f.many_to_many)
+        and f.auto_created
+        and not f.concrete
+    ]
+
+    replacement_page = Page.objects.filter(node_id=page.node_id).exclude(id=page.id).get()
+    logger.info("Fixing reference from Page %s to %s", page.id, replacement_page.id)
+
+    for rel in relations:
+        model = rel.related_model
+        if rel.one_to_one:
+            # One to one relationships should not be duplicated, so just delete object
+            model.objects.filter(**{rel.field.name: page}).delete()
+        elif rel.many_to_many:
+            m2m_objs = model.objects.filter(**{rel.field.name: page})
+            for m2m_obj in m2m_objs:
+                m2m_rel = getattr(m2m_obj, rel.field.name)
+                m2m_rel.remove(page)
+                m2m_rel.add(replacement_page)
+        else:
+            model.objects.filter(**{rel.field.name: page}).update(
+                **{rel.field.name: replacement_page}
+            )
+
+
 def _delete_page(page):
     try:
         logger.info("Deleting Page %s" % page.id)
@@ -76,6 +105,7 @@ class Command(BaseCommand):
             page_content_list = _get_page_contents(page)
 
             if not page_content_list.exists():
+                _fix_page_references(page)
                 _delete_page(page)
                 stats['page_deleted'] = stats['page_deleted'] + 1
                 continue
