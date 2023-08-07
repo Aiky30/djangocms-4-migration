@@ -25,6 +25,7 @@ from djangocms_alias.models import (
 from djangocms_alias.utils import is_versioning_enabled
 
 from djangocms_4_migration.models import PageData
+from djangocms_4_migration.helpers import get_or_create_migration_user
 
 
 logger = logging.getLogger(__name__)
@@ -172,6 +173,7 @@ def get_child_plugins(plugin):
 
 def process_old_alias_sources(site, language, site_plugin_queryset):
     # Creat ea category container
+    migration_user = get_or_create_migration_user()
     cms4_alias_category = _create_site_category(site, language)
 
     for old_plugin in site_plugin_queryset:
@@ -183,7 +185,7 @@ def process_old_alias_sources(site, language, site_plugin_queryset):
         )
         alias_grouper.save()
         # Create Alias Content
-        alias_content = AliasContent.objects.create(
+        alias_content = AliasContent.objects.with_user(migration_user).create(
             alias=alias_grouper,
             name=cms4_alias_name,
             language=language,
