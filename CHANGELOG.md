@@ -1,6 +1,7 @@
 # Changelog
 
 ## (unreleased)
+* fix: import `settings` from `django.conf` rather than from `PYTHONPATH`
 
 
 ## 0.0.2 (2023-07-11)
