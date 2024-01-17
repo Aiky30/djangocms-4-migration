@@ -2,6 +2,7 @@
 
 ## (unreleased)
 
+* feature: Add support for custom user models
 
 ## 0.0.2 (2023-07-11)
 * fix: Added the Github project url to the setup.py file for PyPi linking

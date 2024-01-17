@@ -64,7 +64,7 @@ def forwards(apps, schema_editor):
         # Find the user
         try:
             created_by = User.objects.using(db_alias).get(
-                username=page_content.page.created_by
+                **{User.USERNAME_FIELD: page_content.page.created_by}
             )
         except:
             # Use the first super user as the author as a fall back
